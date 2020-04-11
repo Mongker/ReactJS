@@ -5,31 +5,11 @@
  * @author Mong Lê Văn  on 4/10/2020.
  */
 import React from 'react';
-import { Form, Input, Button, Checkbox, message } from 'antd';
+import { Form, Input, Button, Alert, message } from 'antd';
 import {NavLink } from 'react-router-dom';
 
 // firebasefirebase
 import database from '../firebase/firebase';
-
-const locationLogInHome = {
-  pathname: '/',
-}
-
-// const
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
 
 class SignUp extends React.Component {
     constructor(props){
@@ -37,97 +17,119 @@ class SignUp extends React.Component {
         this.state = {
             user: '',
             pass: '',
+            check: '',
+            userTmp: '#',
+            passTmp: '#',
+            checkTmp: '#',
         };
     }
 
     onChangeUser = (event) => {
         const textUser = event.target.value;
+        this.setState({userTmp: "#"});
         this.setState({ user: textUser});
     };
 
     onChangePass = (event) => {
         const textPass = event.target.value;
+        this.setState({passTmp: "#"});
         this.setState({ pass: textPass});
+    };
+
+    onChangeCheckPass = (event) => {
+      const textCheckPass = event.target.value;
+      this.setState({ checkTmpT: "#"});
+      this.setState({ check: textCheckPass});
     };
     
     onSignUp = () => {
-        const {user, pass} = this.state;
-        // let history = useHistory().useContext(Context);
-        debugger;
-        database.auth()
-        .createUserWithEmailAndPassword(user, pass)
-        .then(this.onLogInHome)
-        .catch((error) => message.info('Thất bại lỗi :'+error))
+        const {user, pass, check} = this.state;
         this.setState({
-          user: '',
-          pass: '',
+          userTmp: user,
+          passTmp: pass,
+          checkTmpT: check,
         });
-        debugger;
+        (pass === check) && (
+          database.auth()
+          .createUserWithEmailAndPassword(user, pass)
+          .then()
+          .then(this.onLogInHome)
+          .catch((error) => message.info('Thất bại lỗi :'+error))
+        ) 
+        
     };
 
     onLogInHome = () => {
       const { history} = this.props;
-      debugger;
-      history.push(locationLogInHome);
-      debugger;
+      history.push("/");
+    };
+
+    onResetText = () => {
+      this.setState({
+        user: '',
+        pass: '',
+        check: '',
+        userTmp: "#",
+        passTmp: "#",
+        checkTmpT: "#",
+      })
     };
 
     render(){
-        const onFinish = values => {
-            console.log('Success:', values);
-          };
-        
-        const onFinishFailed = errorInfo => {
-            console.log('Failed:', errorInfo);
-          };
-          const {user, pass} = this.state;
+        const {user, pass, check, userTmp, passTmp, checkTmp} = this.state;
         return (
-        <Form
-            {...layout}
-            name="basic"
-            initialValues={{
-              remember: true,
-            }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-          >
-            <Form.Item
-              label="Username"
-              name="username"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your username!',
-                },
-              ]}
-            >
-              <Input placeholder="User Name" defaultValue={user} onChange={this.onChangeUser}/>
-            </Form.Item>
-      
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password!',
-                },
-              ]}
-            >
-              <Input.Password placeholder="Pass Word" defaultValue={pass}  onChange={this.onChangePass}/>
-            </Form.Item>
-      
-            <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-      
-            <Form.Item {...tailLayout}>
-              <Button type="primary" htmlType="submit" onClick={this.onSignUp}>
-                Sign Up
-              </Button>
-              <NavLink to="/" activeStyle={{fontWeight: "bold",color: "red"}}>Quay Lại Trang Chủ</NavLink>
-            </Form.Item>
-          </Form>);
+          <div class="flex col-2 row" id="form">
+          <div class="left col">
+            <div class="col-spacer">
+              <div class="form-header"><i class="fas fa-lock icon txtglow"></i><span>SIGN UP</span></div>
+            </div>
+            <div class="input-wrap">
+              <div class="input-icon">
+                <div class="icon"><i class="fas fa-user"></i></div>
+                <input type="text" placeholder="Email" value={user} onChange={this.onChangeUser} />
+              </div>
+              { (userTmp !== "#" || user === userTmp) && (
+                (userTmp.includes('@') && user.includes('.')) 
+                ?
+                (<Alert message="Gmail Đã Được Xác Nhận" type="success" showIcon style={{background: "rgba(250,250,250,0.15)"}} />)
+                :
+                (<Alert message="Không Phải Là Gmail" type="warning" showIcon style={{background: "rgba(250,250,250,0.15)"}} />)
+              )
+              }
+            </div>
+            <div class="input-wrap"> 
+              <div class="input-icon">
+                <div class="icon"><i class="fas fa-key"></i></div>
+                <input type="password" placeholder="Password" value={pass} onChange={this.onChangePass}/>
+              </div>
+              { (passTmp !== "#" || pass === passTmp) && (
+                  (passTmp.length > 7)
+                  ?
+                  (<Alert message="Pass đạt chuẩn (Pass của bạn đã được mã hóa)" type="success" showIcon style={{background: "rgba(250,250,250,0.15)"}} />)
+                  :
+                  (<Alert message="Pass phải có 8 ký tự " type="warning" showIcon style={{background: "rgba(250,250,250,0.15)"}} />) 
+              )
+              }
+            </div>
+            <div class="input-wrap"> 
+              <div class="input-icon">
+                <div class="icon"><i class="fas fa-key"></i></div>
+                <input type="password" placeholder="Check Password" value={check} onChange={this.onChangeCheckPass}/>
+              </div>
+              {
+                  (pass !== check || checkTmp !== "#" ) &&
+                  (<Alert message="Pass không khớp nhau" type="warning" showIcon style={{background: "rgba(250,250,250,0.15)"}} />)
+              }
+            </div>
+            
+            <div class="flex space mt-center">
+              <button class="login big" onClick={this.onLogInHome} >LOGIN-NOW</button>
+              <button class="signup big" onClick={this.onSignUp} >SAVE-NOW</button>
+              <button class="primary big" onClick={this.onResetText}>RESET-NOW</button>
+            </div>
+          </div>
+        </div>
+        );
     }
 }
 export default SignUp;
