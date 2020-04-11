@@ -14,8 +14,9 @@ class RouterURL extends Component {
     render () {
         return (
                 <Switch>
-                    <Route path="/login" component={Login}/>
+                    <Route exact path="/" component={Login}/>
                     <Route path="/signup" component={SignUp}/>
+                    {/* <Route path="/test" component={SignUp}/> */}
                 </Switch>
         )
     }

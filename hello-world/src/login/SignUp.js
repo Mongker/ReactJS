@@ -104,7 +104,7 @@ class SignUp extends React.Component {
       
             <Form.Item {...tailLayout}>
               <Button type="primary" htmlType="submit" onClick={this.onSignUp}>
-               <NavLink to="/login" activeStyle={{fontWeight: "bold",color: "red"}}>Sign Up</NavLink>
+               <NavLink to="/" activeStyle={{fontWeight: "bold",color: "red"}}>Sign Up</NavLink>
               </Button>
             </Form.Item>
           </Form>);
