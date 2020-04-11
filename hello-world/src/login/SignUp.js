@@ -6,9 +6,14 @@
  */
 import React from 'react';
 import { Form, Input, Button, Checkbox, message } from 'antd';
-import {NavLink, useHistory } from 'react-router-dom';
+import {NavLink } from 'react-router-dom';
+
 // firebasefirebase
 import database from '../firebase/firebase';
+
+const locationLogInHome = {
+  pathname: '/',
+}
 
 // const
 const layout = {
@@ -47,16 +52,24 @@ class SignUp extends React.Component {
     
     onSignUp = () => {
         const {user, pass} = this.state;
-        // let history = useHistory();
+        // let history = useHistory().useContext(Context);
+        debugger;
         database.auth()
         .createUserWithEmailAndPassword(user, pass)
-        .then(() =>  this.props.history.push("/", {}))
+        .then(this.onLogInHome)
         .catch((error) => message.info('Thất bại lỗi :'+error))
         this.setState({
           user: '',
           pass: '',
         });
         debugger;
+    };
+
+    onLogInHome = () => {
+      const { history} = this.props;
+      debugger;
+      history.push(locationLogInHome);
+      debugger;
     };
 
     render(){
