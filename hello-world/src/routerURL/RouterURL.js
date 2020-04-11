@@ -10,13 +10,16 @@ import {Route, Switch} from "react-router-dom";
 // component 
 import Login from '../login/Login';
 import SignUp from '../login/SignUp';
+// import Tes from '../login/';
+
 class RouterURL extends Component {
     render () {
         return (
                 <Switch>
                     <Route exact path="/" component={Login}/>
                     <Route path="/signup" component={SignUp}/>
-                    {/* <Route path="/test" component={SignUp}/> */}
+                    {/* <Route path="/test" component={Test}/> */}
+                    <Route component={Login}/>
                 </Switch>
         )
     }

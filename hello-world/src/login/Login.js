@@ -1,40 +1,20 @@
-/**
- * Copyright 2020-present, Mong Lê Văn , Cop.
- * All rights reserved.
- *
- * @author Mong Lê Văn  on 4/10/2020.
- */
-import React from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
+import React, { Component } from 'react'
 import { NavLink }from 'react-router-dom';
+import { message } from 'antd';
 
 // firebasefirebase
 import database from '../firebase/firebase';
 
-// const
-const layout = {
-  labelCol: {
-    span: 8,
-  },
-  wrapperCol: {
-    span: 16,
-  },
-};
-const tailLayout = {
-  wrapperCol: {
-    offset: 8,
-    span: 16,
-  },
-};
+// style 
+import './styles/index.css'
 
-class Login extends React.Component {
+class Login extends Component {
     constructor(props){
         super(props);
         this.state = {
             user: '',
             pass: '',
         };
-        debugger;
     }
 
     onChangeUser = (event) => {
@@ -51,71 +31,46 @@ class Login extends React.Component {
         const {user, pass} = this.state;
         database.auth()
         .signInWithEmailAndPassword(user, pass)
-        .then( alert('Thanh cong'))
-        .catch(error => alert(error))
+        .then(() => message.info('Đăng Nhập Thành Công'))
+        .catch((error) => message.info('Thất bại lỗi :'+error.toString().replace("Error: The email address is badly formatted.", "Đây không phải là một gmail")))
     };
-
-    render(){
-        const onFinish = values => {
-            console.log('Success:', values);
-          };
-        
-        const onFinishFailed = errorInfo => {
-            console.log('Failed:', errorInfo);
-          };
-          const {user, pass} = this.state;
+    render () {
         return (
-         <React.Fragment>
-          <h1 style={{color: 'red'}}>Login</h1>
-          <Form
-            {...layout}
-            name="basic"
-            initialValues={{
-              remember: true,
-            }}
-            style={{border: 10, borderColor: "#000", background: 'pink'}}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-          >
-            <Form.Item
-              label="Username"
-              name="username"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your username!',
-                },
-              ]}
-            >
-              <Input placeholder="User Name" defaultValue={user} onChange={this.onChangeUser}/>
-            </Form.Item>
-      
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password!',
-                },
-              ]}
-            >
-              <Input.Password placeholder="Pass Word" defaultValue={pass}  onChange={this.onChangePass}/>
-            </Form.Item>
-      
-            <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-              <Checkbox>Remember me</Checkbox>
-              <NavLink to="/signup" activeStyle={{fontWeight: "bold",color: "red"}}>SingUP</NavLink>
-            </Form.Item>
-      
-            <Form.Item {...tailLayout}>
-              <Button type="primary" htmlType="submit" onClick={this.onLogin}>
-                Login
-              </Button>
-            </Form.Item>
-          </Form>
-         </React.Fragment>
-        );
+            <div class="flex col-2 row" id="form">
+            <div class="left col">
+              <div class="col-spacer">
+                <div class="form-header"><i class="fas fa-lock icon txtglow"></i><span>Login Form</span></div>
+              </div>
+              <div class="input-wrap">
+                <div class="input-icon">
+                  <div class="icon"><i class="fas fa-user"></i></div>
+                  <input type="text" placeholder="Username or Email" onChange={this.onChangeUser} />
+                </div><a class="input-desc" href="#">Forgot your username?</a>
+              </div>
+              <div class="input-wrap"> 
+                <div class="input-icon">
+                  <div class="icon"><i class="fas fa-key"></i></div>
+                  <input type="password" placeholder="Password" onChange={this.onChangePass}/>
+                </div><a class="input-desc" href="#">Forgot your password?</a>
+              </div>
+              <div class="flex space mt-5">
+                <div class="cb-wrap">
+                  <input class="glow" id="remember" type="checkbox" name="rembember"/>
+                  <label for="remember">Remember me</label>
+                </div>
+                <button class="primary big"  onClick={this.onLogin}>SIGN-IN NOW</button>
+              </div>
+            </div>
+            <div class="right col flex column">
+              <div class="col-spacer"></div>
+              <button class="twitter social"><i class="fab fa-twitter fa-fw"></i>Sign in with Twitter</button>
+              <button class="facebook social"><i class="fab fa-facebook-f fa-fw"></i>Sign in with Facebook</button>
+              <button class="googleplus social"><i class="fab fa-google-plus-g fa-fw"></i>Sign in with Google+</button>
+              <button class="linkedin social"><i class="fab fa-linkedin-in fa-fw"></i>Sign in with Linkedin</button>
+            </div>
+          </div>
+        )
     }
 }
+
 export default Login;

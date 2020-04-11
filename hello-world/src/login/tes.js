@@ -5,8 +5,9 @@
  * @author Mong Lê Văn  on 4/10/2020.
  */
 import React from 'react';
-import { Form, Input, Button, Checkbox, message } from 'antd';
-import {NavLink, useHistory } from 'react-router-dom';
+import { Form, Input, Button, Checkbox } from 'antd';
+import { NavLink }from 'react-router-dom';
+
 // firebasefirebase
 import database from '../firebase/firebase';
 
@@ -26,13 +27,14 @@ const tailLayout = {
   },
 };
 
-class SignUp extends React.Component {
+class Login extends React.Component {
     constructor(props){
         super(props);
         this.state = {
             user: '',
             pass: '',
         };
+        debugger;
     }
 
     onChangeUser = (event) => {
@@ -45,18 +47,12 @@ class SignUp extends React.Component {
         this.setState({ pass: textPass});
     };
     
-    onSignUp = () => {
+    onLogin = () => {
         const {user, pass} = this.state;
-        // let history = useHistory();
         database.auth()
-        .createUserWithEmailAndPassword(user, pass)
-        .then(() =>  this.props.history.push("/", {}))
-        .catch((error) => message.info('Thất bại lỗi :'+error))
-        this.setState({
-          user: '',
-          pass: '',
-        });
-        debugger;
+        .signInWithEmailAndPassword(user, pass)
+        .then( alert('Thanh cong'))
+        .catch(error => alert(error))
     };
 
     render(){
@@ -69,12 +65,15 @@ class SignUp extends React.Component {
           };
           const {user, pass} = this.state;
         return (
-        <Form
+         <React.Fragment>
+          <h1 style={{color: 'red'}}>Login</h1>
+          <Form
             {...layout}
             name="basic"
             initialValues={{
               remember: true,
             }}
+            style={{border: 10, borderColor: "#000", background: 'pink'}}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
           >
@@ -106,15 +105,17 @@ class SignUp extends React.Component {
       
             <Form.Item {...tailLayout} name="remember" valuePropName="checked">
               <Checkbox>Remember me</Checkbox>
+              <NavLink to="/signup" activeStyle={{fontWeight: "bold",color: "red"}}>SingUP</NavLink>
             </Form.Item>
       
             <Form.Item {...tailLayout}>
-              <Button type="primary" htmlType="submit" onClick={this.onSignUp}>
-                Sign Up
+              <Button type="primary" htmlType="submit" onClick={this.onLogin}>
+                Login
               </Button>
-              <NavLink to="/" activeStyle={{fontWeight: "bold",color: "red"}}>Quay Lại Trang Chủ</NavLink>
             </Form.Item>
-          </Form>);
+          </Form>
+         </React.Fragment>
+        );
     }
 }
-export default SignUp;
+export default Login;
