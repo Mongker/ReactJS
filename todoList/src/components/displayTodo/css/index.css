@@ -1,0 +1,31 @@
+.todo-single {
+    color: inherit;
+    font-size: 24px;
+    display: inline-flex;
+    margin-right: 30px;
+}
+
+.delete {
+    position: absolute;
+    right: 0;
+    border: none;
+    background: none;
+    padding: 5px 50px;
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    margin: auto 0;
+    transition: color 0.2s ease-out;
+}
+.wrapper-single {
+    display: flex;
+}
+
+.text-todo {
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    line-height: 1.2;
+    padding: 10px;
+}

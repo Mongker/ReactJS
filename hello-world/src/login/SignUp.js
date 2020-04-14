@@ -5,11 +5,12 @@
  * @author Mong Lê Văn  on 4/10/2020.
  */
 import React from 'react';
-import { Form, Input, Button, Alert, message } from 'antd';
-import {NavLink } from 'react-router-dom';
+import { Alert, message } from 'antd';
+import md5 from 'md5';
 
 // firebasefirebase
 import database from '../firebase/firebase';
+
 
 class SignUp extends React.Component {
     constructor(props){
@@ -51,8 +52,7 @@ class SignUp extends React.Component {
         });
         (pass === check) && (
           database.auth()
-          .createUserWithEmailAndPassword(user, pass)
-          .then()
+          .createUserWithEmailAndPassword(user, md5(pass))
           .then(this.onLogInHome)
           .catch((error) => message.info('Thất bại lỗi :'+error))
         ) 

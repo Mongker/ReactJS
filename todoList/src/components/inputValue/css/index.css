@@ -1,0 +1,20 @@
+.wrapper-input {
+    display: flex;
+}
+
+.news-todo {
+    font-size: 24px;
+    width: 100%;
+    font-family: inherit;
+    font-weight: inherit;
+    border: none;
+}
+
+input:focus {
+    outline: none;
+}
+
+input::-webkit-input-placeholder {
+    color: red; /*Change the placeholder color*/
+    opacity: .2; /*Change the opacity between 0 and 1*/
+}

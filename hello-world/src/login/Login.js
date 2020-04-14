@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { NavLink }from 'react-router-dom';
 import { message } from 'antd';
 
 // firebasefirebase
@@ -7,6 +6,9 @@ import database from '../firebase/firebase';
 
 // style 
 import './styles/index.css'
+
+// block md5 
+import md5 from 'md5';
 
 class Login extends Component {
     constructor(props){
@@ -29,9 +31,9 @@ class Login extends Component {
     
     onLogin = () => {
         const {user, pass} = this.state;
-        database.auth()
-        .signInWithEmailAndPassword(user, pass)
-        .then(() => message.info('Đăng Nhập Thành Công'))
+        database.auth(this.checkLogin())
+        .signInWithEmailAndPassword(user, md5(pass))
+        .then()
         .catch((error) => message.info('Thất bại lỗi :'+error.toString().replace("Error: The email address is badly formatted.", "Đây không phải là một gmail")))
     };
 
@@ -42,6 +44,20 @@ class Login extends Component {
       debugger;
     };
 
+    checkLogin = () => {
+      const {user, pass} = this.state;
+      const { history } = this.props;
+      history.push('/menu');
+      if (typeof(Storage) !== 'undefined') {
+        //Nếu có hỗ trợ
+        localStorage.setItem('userMong', user);
+        localStorage.setItem('passMong', md5(pass));
+    } else {
+        //Nếu không hỗ trợ
+        message.info("Trình duyệt của bạn không hỗ trợ trang web");
+    }
+    }
+    
     onUpdate = () => message.info('Chức năng đang phát triển');
 
     render () {
@@ -72,13 +88,13 @@ class Login extends Component {
                 <button class="signup big" onClick={this.onSigUp} >SIGN-UP NOW</button>
               </div>
             </div>
-            <div class="right col flex column">
+            {/* <div class="right col flex column">
               <div class="col-spacer"></div>
               <button class="twitter social" onClick={this.onUpdate}><i class="fab fa-twitter fa-fw"></i>Sign in with Twitter</button>
               <button class="facebook social" onClick={this.onUpdate}><i class="fab fa-facebook-f fa-fw"></i>Sign in with Facebook</button>
               <button class="googleplus social"onClick={this.onUpdate}><i class="fab fa-google-plus-g fa-fw"></i>Sign in with Google+</button>
               <button class="linkedin social"  onClick={this.onUpdate}><i class="fab fa-linkedin-in fa-fw"></i>Sign in with Linkedin</button>
-            </div>
+            </div> */}
           </div>
         )
     }
