@@ -23,7 +23,6 @@ function mapDispatchToProps(dispatch) {
         create: (value) => dispatch(todoUiActions.create(value)),
         completedAll: (todoList) => dispatch(todoUiActions.completedAll(todoList)),
     };
-
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(InputValue);

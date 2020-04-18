@@ -10,13 +10,9 @@ import Home from './Home/Home';
 import './css/index.css';
 
 class Main extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-
     render() {
         const {update, completedAllTodo} = this.props;
+        debugger;
         return (
             <React.Fragment>
                 <Home update={update} completedAllTodo={completedAllTodo} />
