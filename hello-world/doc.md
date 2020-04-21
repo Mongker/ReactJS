@@ -1,0 +1,1 @@
+Một số  vấn đề cần node lại:

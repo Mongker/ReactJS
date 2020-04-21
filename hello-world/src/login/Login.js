@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { message } from 'antd';
 
-// firebasefirebase
+// firebase
 import database from '../firebase/firebase';
 
 // style 
@@ -47,13 +47,14 @@ class Login extends Component {
     checkLogin = () => {
       const {user, pass} = this.state;
       const { history } = this.props;
-      history.push('/menu');
+      // MongLV by fix tạm test trắc nghiệm 
+      history.push('/multiple-choice');
       if (typeof(Storage) !== 'undefined') {
-        //Nếu có hỗ trợ
+        //Nếu có localStorage hỗ trợ
         localStorage.setItem('userMong', user);
         localStorage.setItem('passMong', md5(pass));
     } else {
-        //Nếu không hỗ trợ
+        //Nếu không localStorage hỗ trợ
         message.info("Trình duyệt của bạn không hỗ trợ trang web");
     }
     }
