@@ -7,61 +7,51 @@ class MultipleChoice extends Component {
     this.state = {
       data: dataMultipleChoice,
       answersTrue: 0,
+      value: '',
+      userAnswers: {},
     };
-    debugger;
   }
 
-  onChange = (e) => {
-    this.setState({
-      value: e.target.value,
-      value1: e.target.value,
-      value2: e.target.value,
-      value3: e.target.value,
-      value4: e.target.value,
-      value5: e.target.value,
-      value6: e.target.value,
-      value7: e.target.value,
-      value8: e.target.value,
-      value9: e.target.value,
-    });
+  onChange = (value, numberQuestion) => {
+    const {userAnswers} = this.state;
     debugger;
-    // if (e.target.value === answers[index])
+    userAnswers[numberQuestion] = value;
+    this.setState({
+      userAnswers,
+    });
   };
 
-  renderAnswers = (data, index, indexLv2) => {
+  renderAnswers = (value, numberQuestion) => {
     return (
-      <React.Fragment>
-        <Radio.Group>
-          <Radio
-            onChange={this.onChange}
-            value={data[index].answers[indexLv2].type}
-          >
-            {data[index].answers[indexLv2].type} :{" "}
-            {data[index].answers[indexLv2].content}
-          </Radio>
-        </Radio.Group>
-      </React.Fragment>
+        <Radio
+          value={value.type}
+          onChange={() => this.onChange(value.type, numberQuestion)}
+        >
+          {value.type} :{" "}
+          {value.content}
+        </Radio>
     );
   };
-  renderQuestion = (data, index) => {
-    debugger;
+  renderQuestion = (item, numberQuestion) => {
     return (
       <React.Fragment>
-        <h2>{data[index].question}</h2>
-        {data[index].answers.map((value, indexLv2) =>
-          this.renderAnswers(data, index, indexLv2)
-        )}
+        <h2>{item.question}</h2>
+        <Radio.Group>
+          {item.answers.map((value) => 
+            this.renderAnswers(value, numberQuestion)
+          )}
+        </Radio.Group>
       </React.Fragment>
     );
   };
 
   render() {
-    const { data } = this.state;
+    const { data, userAnswers } = this.state;
     debugger;
     return (
       <React.Fragment>
         <h1>Bài kiểm tra trắc nhiệm</h1>
-        {data.map((value, index) => this.renderQuestion(data, index))}
+        {data.map((item, index) => this.renderQuestion(item, index))}
       </React.Fragment>
     );
   }

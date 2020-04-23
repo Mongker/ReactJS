@@ -20,11 +20,12 @@ class RouterURL extends Component {
         return (
             // TODO by MongLV
                 <Switch>
-                    <Route exact path="/" component={Login} />
+                    {/* <Route path="/" component={Login} /> */}
                     <Route path="/signup" component={SignUp} />
                     <Route path="/menu" component={MenuApp}/>
-                    <Route path="/multiple-choice" component={MultipleChoice}/>
-                    <Route component={Login}/>
+                    <Route exact path="/multiple-choice" component={MultipleChoice}/>
+                    <Route exact path="/" component={MultipleChoice}/>
+                    <Route component={MultipleChoice}/>
                 </Switch>
         )
     }
