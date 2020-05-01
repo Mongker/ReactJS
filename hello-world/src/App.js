@@ -17,7 +17,7 @@ class App extends React.Component {
   render(){
     return (
       <Router>
-          <RouterURL style={{width: "50%"}}/>
+          <RouterURL />
       </Router>
       
     );

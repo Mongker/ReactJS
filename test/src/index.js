@@ -1,29 +1,12 @@
-/**
- * Copyright 2020-present,
- *  Mong Lê Văn , 
- * Cop.All rights reserved.
- *  @author Mong Lê Văn  on 4/10/2020.
-*/
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-// Redux 
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import allReducers from './reducers';
-
-// Redux - Saga 
-
-let store = createStore(allReducers);
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

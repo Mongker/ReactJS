@@ -1,35 +1,46 @@
 import React, { Component, PropTypes } from "react";
 import { Radio } from "antd";
-import dataMultipleChoice from "./DataMultipleChoice";
+import { dataMultipleChoice, exactly } from './DataMultipleChoice';
 class MultipleChoice extends Component {
   constructor(props) {
     super(props);
     this.state = {
       data: dataMultipleChoice,
+      exactly: exactly,
+      checkExactly: [],
       answersTrue: 0,
       value: '',
-      userAnswers: {},
+      userAnswers: [],
     };
+    debugger;
   }
 
-  onChange = (value, numberQuestion) => {
-    const {userAnswers} = this.state;
-    debugger;
-    userAnswers[numberQuestion] = value;
+  onChange = (_value, numberQuestion) => {
+    const { userAnswers, exactly, checkExactly } = this.state;
+    const newOjb = { questionNumber: numberQuestion, answer: _value };
+    const check = exactly.map((valueExactly, indexExactly) => userAnswers.map((value, index) => {
+      if(valueExactly.numberQuestion === value && valueExactly.answer === value.answer)
+      {
+        return {[numberQuestion]: true}
+      }
+      return {[numberQuestion]: false}
+    }))
     this.setState({
-      userAnswers,
+      userAnswers: [...userAnswers, newOjb],
+      checkExactly: check
     });
+    debugger;
   };
 
   renderAnswers = (value, numberQuestion) => {
     return (
-        <Radio
-          value={value.type}
-          onChange={() => this.onChange(value.type, numberQuestion)}
-        >
-          {value.type} :{" "}
-          {value.content}
-        </Radio>
+      <Radio
+        value={value.type}
+        onChange={() => this.onChange(value.type, numberQuestion)}
+      >
+        {value.type} :{" "}
+        {value.content}
+      </Radio>
     );
   };
   renderQuestion = (item, numberQuestion) => {
@@ -37,7 +48,7 @@ class MultipleChoice extends Component {
       <React.Fragment>
         <h2>{item.question}</h2>
         <Radio.Group>
-          {item.answers.map((value) => 
+          {item.answers.map((value) =>
             this.renderAnswers(value, numberQuestion)
           )}
         </Radio.Group>
@@ -46,7 +57,7 @@ class MultipleChoice extends Component {
   };
 
   render() {
-    const { data, userAnswers } = this.state;
+    const { data } = this.state;
     debugger;
     return (
       <React.Fragment>

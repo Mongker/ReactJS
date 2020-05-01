@@ -12,6 +12,7 @@ import {Route, Switch} from 'react-router-dom';
 import Login from '../login/Login';
 import SignUp from '../login/SignUp';
 import MenuApp from '../components/MenuApp';
+import ListFood from '../components/listFood';
 import MultipleChoice from '../components/multiple_choice/MultipleChoice';
 // import Tes from '../login/';
 
@@ -20,12 +21,13 @@ class RouterURL extends Component {
         return (
             // TODO by MongLV
                 <Switch>
-                    {/* <Route path="/" component={Login} /> */}
+                {/* Thêm exact vào component dev  */}
+                    {/* <Route path="/login" component={Login} /> */}
+                    <Route path="/multiple-choice" component={MultipleChoice}/>
                     <Route path="/signup" component={SignUp} />
                     <Route path="/menu" component={MenuApp}/>
-                    <Route exact path="/multiple-choice" component={MultipleChoice}/>
-                    <Route exact path="/" component={MultipleChoice}/>
-                    <Route component={MultipleChoice}/>
+                    <Route exact path="/" component={ListFood}/>
+                    {/* <Route component={Login}/> */}
                 </Switch>
         )
     }

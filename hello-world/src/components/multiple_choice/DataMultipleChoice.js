@@ -1,8 +1,6 @@
-var dataMultipleChoice = [
-    {
+export var dataMultipleChoice = [{
         question: "Việt Nam ở Đông Nam Á đúng hay sai ?",
-        answers: [
-            {
+        answers: [{
                 type: "A",
                 content: "Đúng "
             },
@@ -11,12 +9,10 @@ var dataMultipleChoice = [
                 content: "Sai"
             }
         ],
-        exactly: "B",
     },
     {
         question: "Trái Đất hình tròn đúng hay sai?",
-        answers: [
-            {
+        answers: [{
                 type: "A",
                 content: "Đúng"
             },
@@ -29,12 +25,10 @@ var dataMultipleChoice = [
                 content: "Hình Cầu"
             }
         ],
-        exactly: "C",
     },
     {
         question: "Bạn là lập trình viên phải không ?",
-        answers: [
-            {
+        answers: [{
                 type: "A",
                 content: "Phải"
             },
@@ -48,7 +42,5 @@ var dataMultipleChoice = [
             }
         ]
     }
-  ];
-  
-  export default dataMultipleChoice;
-  
+];
+export var exactly = [{questionNumber: 1,answer:"A"},{questionNumber: 0,answer:"A"},{questionNumber: 2,answer:"A"}];
