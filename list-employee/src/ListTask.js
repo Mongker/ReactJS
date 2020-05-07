@@ -45,6 +45,8 @@ class ListTask extends Component {
 	render() {
 		const { employees } = this.props;
 		const { page, limit } = this.state;
+		const a = employees.data ? employees.data : [];
+		debugger;
 		return (
 			<div>
 				<h2>List Employee</h2>
@@ -58,7 +60,7 @@ class ListTask extends Component {
 	                        <th>Action</th>                         
 	                    </tr>
 	                    {
-	                        employees.map((employee, index) => {
+	                        a.map((employee, index) => {
 	                            if( ((page - 1) * limit) <= index && index < (limit * page)) {
 	                                return <Task
 	                                        employee={employee} 
@@ -70,8 +72,8 @@ class ListTask extends Component {
 	                    }  
 	                </tbody>                    
 	            </table>
-	            <p>{ page }/{ parseInt(employees.length/limit)+1 }</p>
-	            <button 
+	            <p>{ page }/{ parseInt(employees.length/limit)+1 }</p> 
+	          	<button 
 	            	type="button" 
 	            	className="btn btn-default button" 
 	            	onClick={ () => { this.setFirstLastPage(1) } }
@@ -104,8 +106,10 @@ ListTask.defaultProps = defaultProps;
 const makeMapStateToProps = () => {
     const getEmployeeState = makeGetEmployeeState();
     const mapStateToProps = (state, props) => {
+		const employees = getEmployeeState(state, props)
+		debugger;
         return {
-            employees: getEmployeeState(state, props)
+			employees
         }
     }
     return mapStateToProps;
