@@ -8,6 +8,9 @@ import React from 'react';
 import { Alert, message } from 'antd';
 import md5 from 'md5';
 
+// style 
+import './styles/index.css'
+
 // firebasefirebase
 import database from '../firebase/firebase';
 
@@ -78,6 +81,7 @@ class SignUp extends React.Component {
     render(){
         const {user, pass, check, userTmp, passTmp, checkTmp} = this.state;
         return (
+          <div className="container">
           <div class="flex col-2 row" id="form">
           <div class="left col">
             <div class="col-spacer">
@@ -123,11 +127,12 @@ class SignUp extends React.Component {
             </div>
             
             <div class="flex space mt-center">
-              <button class="login big" onClick={this.onLogInHome} >LOGIN-NOW</button>
-              <button class="signup big" onClick={this.onSignUp} >SAVE-NOW</button>
-              <button class="primary big" onClick={this.onResetText}>RESET-NOW</button>
+              <button class="button login big" onClick={this.onLogInHome} >LOGIN-NOW</button>
+              <button class="button signup big" onClick={this.onSignUp} >SAVE-NOW</button>
+              <button class="button primary big" onClick={this.onResetText}>RESET-NOW</button>
             </div>
           </div>
+        </div>
         </div>
         );
     }

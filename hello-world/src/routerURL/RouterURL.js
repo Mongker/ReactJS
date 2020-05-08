@@ -22,12 +22,12 @@ class RouterURL extends Component {
             // TODO by MongLV
                 <Switch>
                 {/* Thêm exact vào component dev  */}
-                    <Route path="/login" component={Login} />
+                    <Route exact path="/login" component={Login} />
                     <Route path="/multiple-choice" component={MultipleChoice}/>
                     <Route path="/signup" component={SignUp} />
                     <Route path="/menu" component={MenuApp}/>
                     {/* <Route path="/ListFood" component={ListFood}/> */}
-                    {/* <Route component={Login}/> */}
+                    <Route component={Login}/>
                 </Switch>
         )
     }

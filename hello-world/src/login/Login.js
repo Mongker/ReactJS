@@ -47,8 +47,8 @@ class Login extends Component {
     checkLogin = () => {
       const {user, pass} = this.state;
       const { history } = this.props;
-      // MongLV by fix tạm test trắc nghiệm 
-      history.push('/multiple-choice');
+      // MongLV by : router -> menu
+      history.push('/menu');
       if (typeof(Storage) !== 'undefined') {
         //Nếu có localStorage hỗ trợ
         localStorage.setItem('userMong', user);
@@ -63,6 +63,7 @@ class Login extends Component {
 
     render () {
         return (
+          <div className="container">
             <div class="flex col-2 row" id="form">
             <div class="left col">
               <div class="col-spacer">
@@ -85,8 +86,8 @@ class Login extends Component {
                   <label for="remember">Remember me</label>
               </div>
               <div class="flex space mt-center">
-                <button class="primary big" onClick={this.onLogin}>SIGN-IN NOW</button>
-                <button class="signup big" onClick={this.onSigUp} >SIGN-UP NOW</button>
+                <button class="button primary big" onClick={this.onLogin}>SIGN-IN NOW</button>
+                <button class="button signup big" onClick={this.onSigUp} >SIGN-UP NOW</button>
               </div>
             </div>
             {/* <div class="right col flex column">
@@ -96,6 +97,7 @@ class Login extends Component {
               <button class="googleplus social"onClick={this.onUpdate}><i class="fab fa-google-plus-g fa-fw"></i>Sign in with Google+</button>
               <button class="linkedin social"  onClick={this.onUpdate}><i class="fab fa-linkedin-in fa-fw"></i>Sign in with Linkedin</button>
             </div> */}
+          </div>
           </div>
         )
     }

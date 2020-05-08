@@ -4,7 +4,17 @@ body {
   height: 100%;
 }
 body {
-  background: url("http://bgfons.com/uploads/cloth/cloth_texture1068.jpg") center center no-repeat;
+  /* background: url("http://bgfons./uploads/cloth/cloth_texture1068.jpg") center center no-repeat; */
+  background: rgb(144, 144, 156);
+  font-family: Roboto, Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container{
+  background: rgb(28, 27, 49);
+  width: 100%;
+  height: 100%;
   font-family: Roboto, Arial, sans-serif;
   display: flex;
   align-items: center;
@@ -12,7 +22,7 @@ body {
 }
 .cb-wrap label,
 .cb-wrap input,
-button {
+.button {
   cursor: pointer;
 }
 a {
@@ -20,7 +30,7 @@ a {
   text-decoration: none;
 }
 input:focus,
-button:focus {
+.button:focus {
   outline: none;
 }
 .col-spacer {
@@ -94,7 +104,7 @@ button:focus {
 #form .input-icon input:focus {
   background-color: rgba(250,250,250,0.15);
 }
-button {
+.button {
   border: 2px solid transparent;
   background-color: transparent;
   box-shadow: inset 0 0 15px #00e5ff, 0 0 15px #00e5ff;
@@ -103,7 +113,7 @@ button {
   padding: 0.5rem;
   transition: background-color 0.2s ease-in;
 }
-button i {
+.button i {
   margin: 0 0.6rem;
 }
 button.social {
