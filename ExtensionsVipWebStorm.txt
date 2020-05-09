@@ -1,0 +1,21 @@
+Auto Import 
+Babel JavaScript
+Beautify
+Code Spell Checker
+Color Highlight
+Copy Copy Past
+ESLint
+Find Usages
+Flow Language Suppport
+Git Blame
+Git History
+IntelliSense for CSS class name in HTML
+open in browseer
+Path Intellisense
+Prettier-Code formatter
+Rainbow Brackets
+React Native Tools
+React Standard Style code snippets
+SVG Viewer
+TODO Highlight
+
