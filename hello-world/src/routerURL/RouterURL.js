@@ -10,6 +10,7 @@ import {Route, Switch} from 'react-router-dom';
 
 // component 
 import Login from '../login/Login';
+import LoginAdmin from '../components/account/LoginAdmin';
 import SignUp from '../login/SignUp';
 import MenuApp from '../components/MenuApp';
 // import ListFood from '../components/listFood';
@@ -26,7 +27,7 @@ class RouterURL extends Component {
                     <Route path="/multiple-choice" component={MultipleChoice}/>
                     <Route path="/signup" component={SignUp} />
                     <Route path="/menu" component={MenuApp}/>
-                    {/* <Route path="/ListFood" component={ListFood}/> */}
+                    <Route path="/login-admin" component={LoginAdmin} />
                     <Route component={Login}/>
                 </Switch>
         )

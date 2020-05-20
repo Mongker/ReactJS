@@ -1,0 +1,28 @@
+.background {
+    background-image: url('./image/background.jpg');
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    height: 660px;
+}
+.container {
+    text-align: center;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    /* background-image: url('./image/background.jpg'); */
+}
+.img-logo {
+    border-radius: 50%;
+}
+.text-login {
+    color: red;
+}
+.input {
+    width: 35%;
+    border-radius: 5em;
+    text-align: center;
+}
+::placeholder {
+    color: red;
+    text-align: center;
+}

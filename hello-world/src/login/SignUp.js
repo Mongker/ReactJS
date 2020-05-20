@@ -9,7 +9,7 @@ import { Alert, message } from 'antd';
 import md5 from 'md5';
 
 // style 
-import './styles/index.css'
+// import './styles/index.css'
 
 // firebasefirebase
 import database from '../firebase/firebase';

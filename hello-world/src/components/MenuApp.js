@@ -20,10 +20,6 @@ class MenuApp extends React.Component {
             check: false
         };
     };
-    componentWillMount() {
-        console.log("Run componentWillMount ")
-        this.checkAccount();
-    };
 
     checkAccount = () => {
         const user = localStorage.getItem('userMong');
@@ -42,12 +38,6 @@ class MenuApp extends React.Component {
         return connect;
 
     };
-    // MongLV by: Hàm này sẽ được sử dụng lại sau này
-    // checkLogin = () => {
-    //     const { check } = this.state;
-    //     debugger;
-    //     return this.setState({check: !check});
-    // }
 
     loadingLogin = () => {
         const { history } = this.props;
@@ -70,6 +60,11 @@ class MenuApp extends React.Component {
                 </div>
             </React.Fragment>
         );
+    }
+
+    componentDidMount(){
+        console.log("Gọi và check dữ liệu")
+        this.checkAccount();
     }
 }
 
