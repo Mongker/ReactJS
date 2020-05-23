@@ -13,6 +13,8 @@ import Login from '../login/Login';
 import LoginAdmin from '../components/account/LoginAdmin';
 import SignUp from '../login/SignUp';
 import MenuApp from '../components/MenuApp';
+import LoginChat from '../components/messageChat/LoginChat';
+import chatRoom from '../components/messageChat/chatRoom';
 // import ListFood from '../components/listFood';
 import MultipleChoice from '../components/multiple_choice/MultipleChoice';
 // import Tes from '../login/';
@@ -23,12 +25,14 @@ class RouterURL extends Component {
             // TODO by MongLV
                 <Switch>
                 {/* Thêm exact vào component dev  */}
-                    <Route exact path="/login" component={Login} />
+                    {/* <Route exact path="/login" component={Login} /> */}
                     <Route path="/multiple-choice" component={MultipleChoice}/>
                     <Route path="/signup" component={SignUp} />
                     <Route path="/menu" component={MenuApp}/>
                     <Route path="/login-admin" component={LoginAdmin} />
-                    <Route component={Login}/>
+                    <Route path="/message" component={LoginChat} />
+                    <Route path="/chatRoom" component={chatRoom} />
+                    {/* <Route component={Login}/> */}
                 </Switch>
         )
     }
