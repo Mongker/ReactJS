@@ -32,29 +32,29 @@ class chatRoom extends Component {
   _renderChatLine = (item) => {
     if (item.userName === this.state.username) {
       return (
-          <Row>
-          <Col span={3}>
-            <h3 style={{ color: "blue" }}>
-              <p>Tôi: </p>
-            </h3>
-          </Col>
-          <Col span={18}>
-            <h3>{item.chatContent}</h3>
-          </Col>
-        </Row>
-      );
-    }
-    return (
         <Row>
           <Col span={6}>
-            <h3 style={{ color: "red" }}>
-              <p>{item.userName}: </p>
+            <h3 style={{ color: "blue" }}>
+              <p>Tôi: </p>
             </h3>
           </Col>
           <Col span={18}>
             <h5>{item.chatContent}</h5>
           </Col>
         </Row>
+      );
+    }
+    return (
+      <Row>
+        <Col span={6}>
+          <h3 style={{ color: "red" }}>
+            <p>{item.userName}: </p>
+          </h3>
+        </Col>
+        <Col span={18}>
+          <h5>{item.chatContent}</h5>
+        </Col>
+      </Row>
     );
   };
   _sendMessage = () => {
@@ -78,17 +78,18 @@ class chatRoom extends Component {
     );
   };
   render() {
-    const { chatData } = this.state;
+    const { chatData, chatInputContent } = this.state;
     console.log("Run Render ChatRoom");
     debugger;
     return (
-      <div style={{alignItems: "center", textAlign: "center"}}>
+      <div style={{ alignItems: "center", textAlign: "center" }}>
         <h1>Hộp thứ đến:</h1>
         {chatData.map((item) => this._renderChatLine(item))}
         <h1>Tạo tin mới</h1>
         <Row>
           <h4>Name: {localStorage.getItem("Name_Chat")}</h4>
           <Input
+            value={chatInputContent}
             onChange={this._onChangeChatInput}
             onPressEnter={this._sendMessage}
           />
