@@ -1,0 +1,26 @@
+.container {
+    align-items: center;
+    text-align: center;
+    display: block;
+}
+.todoList {
+    padding-top: 5%;
+}
+.centerList {
+    border-style: solid;
+    border-color: coral;
+}
+.row-scroll {
+    align-items: center;
+    text-align: center;
+    overflow-y: scroll;
+    height: 300px;
+    width: 100%;
+}
+.title {
+    color: red;
+}
+.row-button {
+    border-top: #27222200;
+    padding: 5%;
+}

@@ -1,10 +1,8 @@
-import FoodReducer from './foods-reducer';
-import UserReducer from './users-reducer';
-import {combineReducers} from 'redux';
+import { combineReducers } from "redux";
+import MainReducers from "./MainReducers";
 
 const allReducers = combineReducers({
-    foods: FoodReducer,
-    users: UserReducer
+  MainReducers
+  // Nếu có nhiều reducers thì viết thêm ở dướidưới
 });
-
 export default allReducers;
