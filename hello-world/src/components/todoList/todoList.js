@@ -5,6 +5,7 @@ import database from "../../firebase/firebase";
 // css
 import "./styles/index.css";
 import { Row, Col, Button, Modal, Input, DatePicker, Select } from "antd";
+import {DeleteTwoTone} from '@ant-design/icons';
 
 // const
 
@@ -18,7 +19,7 @@ class todoList extends Component {
     console.log("Run constructor");
     this.state = {
       visible: false,
-      listTodo: [],
+      listTodo: {},
       id: 0,
       cap_do: "",
       ngay_bat_dau: "",
@@ -38,8 +39,9 @@ class todoList extends Component {
       .ref("/todoList")
       .on("value", (snapshot) => {
         if (snapshot.val() !== undefined && snapshot.val() !== null) {
-          this.setState({
-            listTodo: Object.values(snapshot.val()),
+          debugger;
+            this.setState({
+            listTodo: snapshot.val(),
           });
         }
       });
@@ -141,7 +143,7 @@ class todoList extends Component {
             <Col span="6"></Col>
             <Col span="12">
               <div className={"centerList"}>
-                <h1 className={"title"}>Danh Sách Công Việc</h1>
+                <h1 class={"title"}>Danh Sách Công Việc</h1>
                 <Row>
                   <div
                     style={{
@@ -152,9 +154,12 @@ class todoList extends Component {
                       width: "100%",
                     }}
                   >
-                    {listTodo.map((item) => (
-                      <div>
-                        <h1 style={{ color: "blue" }}>{item.tencongviec}</h1>
+                    {Object.keys(listTodo).map((item) => (
+                      <div className={'item'}>
+                      <Row style={{alignItems: 'center'}}>
+                      <Col span={'20'}><h1 style={{ color: "blue" }}>{listTodo[item].tencongviec}</h1></Col>
+                      <Col span={'4'}><DeleteTwoTone twoToneColor={'red'} style={{ fontSize: "50px"}} /></Col>
+                      </Row>
                       </div>
                     ))}
                   </div>

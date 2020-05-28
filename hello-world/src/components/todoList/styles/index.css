@@ -6,9 +6,13 @@
 .todoList {
     padding-top: 5%;
 }
+.main {
+    
+}
 .centerList {
     border-style: solid;
     border-color: coral;
+    background-color:  rgb(198, 202, 195);
 }
 .row-scroll {
     align-items: center;
@@ -16,11 +20,23 @@
     overflow-y: auto;
     height: 300px;
     width: 100%;
+
 }
 .title {
+    border-bottom: 1px solid;
+    border-bottom-color: crimson;
     color: red;
+    background-color: rgb(235, 196, 124);
 }
 .row-button {
     border-top: #27222200;
     padding: 5%;
+}
+.item:hover {
+    background-color: rgb(139, 142, 184);
+    /* border-bottom: 1px solid; */
+}
+.item {
+    border-bottom: 1px solid;
+    border-bottom-color: rgb(58, 58, 54);
 }
