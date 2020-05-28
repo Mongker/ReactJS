@@ -13,7 +13,7 @@
 .row-scroll {
     align-items: center;
     text-align: center;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 300px;
     width: 100%;
 }
