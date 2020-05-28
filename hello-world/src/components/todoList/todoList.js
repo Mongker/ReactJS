@@ -5,7 +5,7 @@ import database from "../../firebase/firebase";
 // css
 import "./styles/index.css";
 import { Row, Col, Button, Modal, Input, DatePicker, Select } from "antd";
-import {DeleteTwoTone} from '@ant-design/icons';
+import { DeleteFilled } from "@ant-design/icons";
 
 // const
 
@@ -40,7 +40,7 @@ class todoList extends Component {
       .on("value", (snapshot) => {
         if (snapshot.val() !== undefined && snapshot.val() !== null) {
           debugger;
-            this.setState({
+          this.setState({
             listTodo: snapshot.val(),
           });
         }
@@ -102,6 +102,7 @@ class todoList extends Component {
       noi_dung: "",
       trang_thai: "Open",
     });
+    this._onDelete();
   };
 
   handleDate = (date, dateString) => {
@@ -130,6 +131,11 @@ class todoList extends Component {
     });
   };
 
+  _onDelete = () => {
+    debugger;
+    database.database.ref('/todoList/-M8PGKGV9WSLJRDYWLMY').remove();
+  };
+
   render() {
     const { visible, listTodo } = this.state;
     debugger;
@@ -155,11 +161,20 @@ class todoList extends Component {
                     }}
                   >
                     {Object.keys(listTodo).map((item) => (
-                      <div className={'item'}>
-                      <Row style={{alignItems: 'center'}}>
-                      <Col span={'20'}><h1 style={{ color: "blue" }}>{listTodo[item].tencongviec}</h1></Col>
-                      <Col span={'4'}><DeleteTwoTone twoToneColor={'red'} style={{ fontSize: "50px"}} /></Col>
-                      </Row>
+                      <div className={"item"}>
+                        <Row style={{ alignItems: "center" }}>
+                          <Col span={"20"}>
+                            <h1 style={{ color: "blue" }}>
+                              {listTodo[item].tencongviec}
+                            </h1>
+                          </Col>
+                          <Col span={"4"}>
+                            <DeleteFilled
+                              className="delete"
+                            //   onClick={this._onDelete(item)}
+                            />
+                          </Col>
+                        </Row>
                       </div>
                     ))}
                   </div>

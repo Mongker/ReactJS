@@ -6,13 +6,11 @@
 .todoList {
     padding-top: 5%;
 }
-.main {
     
-}
 .centerList {
     border-style: solid;
-    border-color: coral;
-    background-color:  rgb(198, 202, 195);
+    border-color: rgb(2, 2, 2);
+    background-color:  rgb(255, 255, 255);
 }
 .row-scroll {
     align-items: center;
@@ -25,18 +23,24 @@
 .title {
     border-bottom: 1px solid;
     border-bottom-color: crimson;
-    color: red;
-    background-color: rgb(235, 196, 124);
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 78, 247);
 }
 .row-button {
-    border-top: #27222200;
+    /* border-top: #27222200; */
     padding: 5%;
 }
 .item:hover {
-    background-color: rgb(139, 142, 184);
+    background-color: rgb(156, 156, 160);
     /* border-bottom: 1px solid; */
 }
 .item {
     border-bottom: 1px solid;
-    border-bottom-color: rgb(58, 58, 54);
+    border-bottom-color: rgb(0, 0, 0);
+}
+.delete:hover {
+    font-size: 60px;
+}
+.delete {
+    font-size: 40px;
 }
