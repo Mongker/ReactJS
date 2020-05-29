@@ -102,7 +102,7 @@ class todoList extends Component {
       noi_dung: "",
       trang_thai: "Open",
     });
-    this._onDelete();
+    // this._onDelete();
   };
 
   handleDate = (date, dateString) => {
@@ -131,9 +131,9 @@ class todoList extends Component {
     });
   };
 
-  _onDelete = () => {
+  _onDelete = (item) => {
     debugger;
-    database.database.ref('/todoList/-M8PGKGV9WSLJRDYWLMY').remove();
+    database.database().ref().child('/todoList/'+item).remove();
   };
 
   render() {
@@ -171,7 +171,7 @@ class todoList extends Component {
                           <Col span={"4"}>
                             <DeleteFilled
                               className="delete"
-                            //   onClick={this._onDelete(item)}
+                              onClick={() => this._onDelete(item)}
                             />
                           </Col>
                         </Row>
