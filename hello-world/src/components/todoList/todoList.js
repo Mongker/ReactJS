@@ -19,7 +19,7 @@ class todoList extends Component {
     console.log("Run constructor");
     this.state = {
       visible: false,
-      listTodo: {},
+      listTodo: [],
       id: 0,
       cap_do: "",
       ngay_bat_dau: "",
@@ -32,17 +32,27 @@ class todoList extends Component {
 
   componentDidMount() {
     console.log("Run componentDidMount todoList");
+    const {listTodo} =this.state;
     let username = localStorage.getItem("Name_Chat");
     this.setState({ username });
     database
       .database()
       .ref("/todoList")
-      .on("value", (snapshot) => {
+      .on("child_added", (snapshot) => {
         if (snapshot.val() !== undefined && snapshot.val() !== null) {
           debugger;
-          this.setState({
-            listTodo: snapshot.val(),
+          listTodo.push({
+            id: snapshot.key,
+            capdo: snapshot.val().capdo,
+            ngaybatdau: snapshot.val().ngaybatdau,
+            ngayketthuc: snapshot.val().ngayketthuc,
+            tencongviec: snapshot.val().tencongviec,
+            noidung: snapshot.val().noidung,
+            trangthai: snapshot.val().trangthai,
           });
+          this.setState({
+            listTodo: listTodo,
+          })
         }
       });
   }
@@ -70,7 +80,7 @@ class todoList extends Component {
       .ref("/todoList")
       .push({
         capdo: cap_do,
-        id: id + Math.floor(Math.random() * 10000),
+        id: id,
         ngaybatdau: ngay_bat_dau,
         ngayketthuc: ngay_ket_thuc,
         tencongviec: ten_cong_viec,
@@ -102,7 +112,6 @@ class todoList extends Component {
       noi_dung: "",
       trang_thai: "Open",
     });
-    // this._onDelete();
   };
 
   handleDate = (date, dateString) => {
@@ -131,9 +140,14 @@ class todoList extends Component {
     });
   };
 
-  _onDelete = (item) => {
+  _onDelete = (itm, index) => {
+    const { listTodo } = this.state;
     debugger;
-    database.database().ref().child('/todoList/'+item).remove();
+    database.database().ref().child('/todoList/'+itm.id).remove();
+    const newListTodo = listTodo.filter(item => item.id !== itm.id);
+    this.setState({
+      listTodo: newListTodo,
+    })
   };
 
   render() {
@@ -151,27 +165,19 @@ class todoList extends Component {
               <div className={"centerList"}>
                 <h1 class={"title"}>Danh Sách Công Việc</h1>
                 <Row>
-                  <div
-                    style={{
-                      alignItems: "center",
-                      textAlign: "center",
-                      overflowY: "auto",
-                      height: "300px",
-                      width: "100%",
-                    }}
-                  >
-                    {Object.keys(listTodo).map((item) => (
+                  <div className={'row-scroll'}>
+                    {listTodo.map((item, index) => (
                       <div className={"item"}>
                         <Row style={{ alignItems: "center" }}>
                           <Col span={"20"}>
                             <h1 style={{ color: "blue" }}>
-                              {listTodo[item].tencongviec}
+                              {item.tencongviec}
                             </h1>
                           </Col>
                           <Col span={"4"}>
                             <DeleteFilled
                               className="delete"
-                              onClick={() => this._onDelete(item)}
+                              onClick={() => this._onDelete(item, index)}
                             />
                           </Col>
                         </Row>
